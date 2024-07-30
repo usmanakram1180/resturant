@@ -1,0 +1,128 @@
+<div class="container-xxl bg-white p-0">
+        <%# <!-- Spinner Start -->
+        <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+            <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+        <!-- Spinner End --> %>
+
+
+        <!-- Navbar & Hero Start -->
+        <div class="container-xxl position-relative p-0">
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-4 px-lg-5 py-3 py-lg-0">
+                <a href="" class="navbar-brand p-0">
+                    <h1 class="text-primary m-0"><i class="fa fa-utensils me-3"></i>Restoran</h1>
+                    <!-- <img src="img/logo.png" alt="Logo"> -->
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                    <span class="fa fa-bars"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                     <div class="navbar-nav ms-auto py-0 pe-4">
+                        <%= link_to 'Home', home_path, class: 'nav-item nav-link' %>
+                        <%= link_to 'About', about_path, class: 'nav-item nav-link' %>
+                        <%= link_to 'Service', service_path, class: 'nav-item nav-link' %>
+                        <%= link_to 'Menu', menu_path, class: 'nav-item nav-link' %>
+                        <%= link_to 'Booking', booking_path, class: 'nav-item nav-link active   ' %>
+                        <%= link_to 'Team', team_path, class: 'nav-item nav-link' %>
+                        <%= link_to 'Testimonial', testimonial_path, class: 'nav-item nav-link' %>
+                        <%= link_to 'Contact', contact_path, class: 'nav-item nav-link' %>
+                    </div>
+                    <a href="" class="btn btn-primary py-2 px-4">Book A Table</a>
+                </div>
+            </nav>
+
+            <div class="container-xxl py-5 bg-dark hero-header mb-5">
+                <div class="container text-center my-5 pt-5 pb-4">
+                    <h1 class="display-3 text-white mb-3 animated slideInDown">Booking</h1>
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb justify-content-center text-uppercase">
+                            <li class="breadcrumb-item"><%= link_to 'Home', home_path %></li>
+                            <li class="breadcrumb-item"><%= link_to 'Pages' %></li>
+                            <li class="breadcrumb-item text-white active" aria-current="page">Booking</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+        <!-- Navbar & Hero End -->
+        <!-- Reservation Start -->
+        <div class="container-xxl py-5 px-0 wow fadeInUp" data-wow-delay="0.1s">
+            <div class="row g-0">
+                <div class="col-md-6">
+                    <div class="video">
+                        <button type="button" class="btn-play" data-bs-toggle="modal" data-src="https://www.youtube.com/embed/DWRcNpR6Kdc" data-bs-target="#videoModal">
+                            <span></span>
+                        </button>
+                    </div>
+                </div>
+                <div class="col-md-6 bg-dark d-flex align-items-center">
+                    <div class="p-5 wow fadeInUp" data-wow-delay="0.2s">
+                        <h5 class="section-title ff-secondary text-start text-primary fw-normal">Reservation</h5>
+                        <h1 class="text-white mb-4">Book A Table Online</h1>
+                        <h1>New Booking</h1>
+
+<%= form_with(model: @booking, local: true) do |form| %>
+  <div class="row g-3">
+    <div class="col-md-6">
+      <div class="form-floating">
+        <%= form.text_field :name, class: "form-control", placeholder: "Your Name", required: "true" %>
+        <label for="booking_name">Your Name</label>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-floating">
+        <%= form.email_field :email, class: "form-control", placeholder: "Your Email", required: "true" %>
+        <label for="booking_email">Your Email</label>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-floating date" id="date3" data-target-input="nearest">
+        <%= form.text_field :datetime, class: "form-control datetimepicker-input", placeholder: "Date & Time", data: { target: "#date3", toggle: "datetimepicker" }, required: "true" %>
+        <label for="booking_datetime">Date & Time</label>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-floating">
+        <%= form.select :people, options_for_select([['People 1', 1], ['People 2', 2], ['People 3', 3]]), {}, class: "form-select" %>
+        <label for="booking_people">No Of People</label>
+      </div>
+    </div>
+    <div class="col-12">
+      <div class="form-floating">
+        <%= form.text_area :message, class: "form-control", placeholder: "Special Request", style: "height: 100px" %>
+        <label for="booking_message">Special Request</label>
+      </div>
+    </div>
+    <div class="col-12">
+      <%= form.submit "Book Now", class: "btn btn-primary w-100 py-3" %>
+    </div>
+  </div>
+<% end %>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="videoModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content rounded-0">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Youtube Video</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <!-- 16:9 aspect ratio -->
+                        <div class="ratio ratio-16x9">
+                            <%= content_tag :iframe, "", class: "embed-responsive-item", id: "video", allowfullscreen: true, allowscriptaccess: "always", allow: "autoplay", src: @video_url %>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Reservation Start -->  
+        <%= render "shared/footer" %>
+</div>
